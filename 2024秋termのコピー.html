@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ランダム画像表示</title>
+    <style>
+        /* ページ全体のサイズを指定 */
+        body {
+            width: 1080px;
+            height: 500px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 画像を横並びに表示するためのスタイル */
+        .image-container {
+            display: flex;
+            gap: 20px; /* 画像の間の隙間 */
+            
+        }
+
+        img {
+            height: 100%;
+            max-height: 500px;
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <!-- ランダムに選ばれた2枚の画像を表示するための要素 -->
+        <img id="image1" src="" alt="ランダム画像1">
+        <img id="image2" src="" alt="ランダム画像2">
+    </div>
+
+    <script>
+        // 事前に保存した10枚の写真のパスを配列に格納
+        const images = [
+            'images/term_photo1.jpg',
+            'images/term_photo2.jpg',
+            'images/term_photo3.jpg',
+            'images/term_photo4.jpg',
+            'images/term_photo5.jpg',
+            'images/term_photo6.jpg',
+            'images/term_photo7.jpg',
+            'images/term_photo8.jpg',
+            'images/term_photo9.jpg',
+            'images/term_photo10.jpg'
+        ];
+
+        // ランダムなインデックスを生成する関数
+        function getRandomIndex(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+        // ランダムで2枚の異なる画像を選ぶ
+        function displayRandomImages() {
+            let index1 = getRandomIndex(images.length);
+            let index2;
+            do {
+                index2 = getRandomIndex(images.length);
+            } while (index1 === index2); // 同じ画像が選ばれないようにする
+
+            document.getElementById('image1').src = images[index1];
+            document.getElementById('image2').src = images[index2];
+        }
+
+        // ページ読み込み時にランダムな画像を表示
+        window.onload = displayRandomImages;
+    </script>
+</body>
+</html>
